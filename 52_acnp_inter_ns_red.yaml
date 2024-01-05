@@ -1,0 +1,27 @@
+apiVersion: crd.antrea.io/v1alpha1
+kind: ClusterNetworkPolicy
+metadata:
+  name: acnp-inter-ns-red
+spec:
+  priority: 8.1
+  tier: application
+  appliedTo:
+  - namespaceSelector:
+      matchLabels:
+        tenant: red
+  ingress:
+  - name: AllowFromRed
+    action: Allow
+    from:
+    - namespaceSelector:
+        matchLabels:
+          tenant: red
+    enableLogging: true
+  egress:
+  - name: AllowToRed
+    action: Allow
+    to:
+    - namespaceSelector:
+        matchLabels:
+          tenant: red
+    enableLogging: true

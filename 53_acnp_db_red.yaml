@@ -1,0 +1,19 @@
+apiVersion: crd.antrea.io/v1alpha1
+kind: ClusterNetworkPolicy
+metadata:
+  name: acnp-db-red
+spec:
+  priority: 8.2
+  tier: application
+  appliedTo:
+  - group: "red2-app1"
+  egress:
+  - name: AllowToDB
+    action: Allow
+    to:
+    - ipBlock:
+        cidr: 192.168.10.10/32
+    ports:
+    - protocol: TCP
+      port: 1521
+    enableLogging: true

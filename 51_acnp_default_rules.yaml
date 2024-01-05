@@ -1,0 +1,41 @@
+apiVersion: crd.antrea.io/v1alpha1
+kind: ClusterNetworkPolicy
+metadata:
+  name: acnp-default-rules
+spec:
+  priority: 1
+  tier: baseline
+  appliedTo:
+  - namespaceSelector:
+      matchExpressions:
+      - {key: kubernetes.io/metadata.name, operator: NotIn, values: [kube-system]}
+  ingress:
+  - name: AllowFromSameNS
+    action: Allow
+    from:
+    - namespaces:
+        match: Self
+    enableLogging: true
+  - name: DropFromAllOtherNS
+    action: Drop
+    from:
+    - namespaceSelector: {}
+    enableLogging: true
+  - name: DropAllIngress
+    action: Drop
+    enableLogging: true
+  egress:
+  - name: AllowToSameNS
+    action: Allow
+    to:
+    - namespaces:
+        match: Self
+    enableLogging: true
+  - name: DropToAllOtherNS
+    action: Drop
+    to:
+    - namespaceSelector: {}
+    enableLogging: true
+  - name: DropAllEgress
+    action: Drop
+    enableLogging: true

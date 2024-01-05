@@ -1,0 +1,11 @@
+apiVersion: crd.antrea.io/v1alpha3
+kind: ClusterGroup
+metadata:
+  name: red2-app1
+spec:
+  podSelector:
+    matchLabels:
+      app: app1
+  namespaceSelector:
+    matchLabels:
+      kubernetes.io/metadata.name: red2

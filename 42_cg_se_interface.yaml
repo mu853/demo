@@ -1,0 +1,16 @@
+apiVersion: crd.antrea.io/v1alpha3
+kind: ClusterGroup
+metadata:
+  name: se-interface
+spec:
+  ipBlocks:
+  - cidr: 192.168.60.31/32
+  - cidr: 192.168.60.32/32
+  - cidr: 192.168.60.33/32
+  - cidr: 192.168.60.34/32
+  - cidr: 192.168.60.35/32
+  - cidr: 192.168.60.36/32
+  - cidr: 192.168.60.37/32
+  - cidr: 192.168.60.38/32
+  - cidr: 192.168.60.39/32
+  - cidr: 192.168.60.40/32

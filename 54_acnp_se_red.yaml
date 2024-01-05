@@ -1,0 +1,18 @@
+apiVersion: crd.antrea.io/v1alpha1
+kind: ClusterNetworkPolicy
+metadata:
+  name: acnp-se-red
+spec:
+  priority: 8.0
+  tier: application
+  appliedTo:
+  - group: "red1-web1"
+  ingress:
+  - name: AllowFromSE
+    action: Allow
+    from:
+    - group: "se-interface"
+    ports:
+    - protocol: TCP
+      port: 80
+    enableLogging: true

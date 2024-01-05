@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  index.html: "red2 - app1\n"
+kind: ConfigMap
+metadata:
+  name: app1-content
+  labels:
+    demo: demo
+  namespace: red2

@@ -1,0 +1,48 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web1
+    demo: demo
+  name: web1
+  namespace: red1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web1
+  template:
+    metadata:
+      labels:
+        app: web1
+        demo: demo
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        volumeMounts:
+        - name: content
+          mountPath: /usr/share/nginx/html/index.html
+          subPath: index.html
+      volumes:
+      - name: content
+        configMap:
+          name: web1-content
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: web1
+    demo: demo
+  name: web1
+  namespace: red1
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: web1
+  type: LoadBalancer

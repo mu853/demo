@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  index.html: "red1 - web1\n"
+kind: ConfigMap
+metadata:
+  name: web1-content
+  labels:
+    demo: demo
+  namespace: red1
