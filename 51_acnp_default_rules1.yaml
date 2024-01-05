@@ -1,0 +1,18 @@
+apiVersion: crd.antrea.io/v1alpha1
+kind: ClusterNetworkPolicy
+metadata:
+  name: acnp-default-rules1
+spec:
+  priority: 1
+  tier: baseline
+  appliedTo:
+  - namespaceSelector:
+      matchExpressions:
+      - {key: kubernetes.io/metadata.name, operator: In, values: [vmware-system-csi, avi-system, tanzu-system-logging]}
+  egress:
+  - name: AllowToManagement
+    action: Allow
+    to:
+    - ipBlock:
+        cidr: 192.168.10.0/24
+    enableLogging: true

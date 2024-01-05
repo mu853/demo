@@ -1,14 +1,14 @@
 apiVersion: crd.antrea.io/v1alpha1
 kind: ClusterNetworkPolicy
 metadata:
-  name: acnp-default-rules
+  name: acnp-default-rules2
 spec:
-  priority: 1
+  priority: 2
   tier: baseline
   appliedTo:
   - namespaceSelector:
       matchExpressions:
-      - {key: kubernetes.io/metadata.name, operator: NotIn, values: [kube-system]}
+      - {key: kubernetes.io/metadata.name, operator: NotIn, values: [kube-system, tanzu-system-logging, tkg-system, tkg-system-public, vmware-system-csi, avi-system ]}
   ingress:
   - name: AllowFromSameNS
     action: Allow
